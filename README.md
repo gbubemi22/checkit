@@ -328,9 +328,4 @@ grpcurl -plaintext -d '{"userId":"f7bdb53c-52cf-4d6f-8ec8-bb86bcb06f0d"}' \
   localhost:5002 wallet.WalletService/GetWallet
 ```
 
-## Standout design choices
 
-- HTTP concerns are centralized in the gateway rather than duplicated across services.
-- gRPC contracts and request DTOs are shared from `packages/`.
-- Internal verification between services happens only over gRPC.
-- The service boundaries are easier to explain in an interview or code review.
