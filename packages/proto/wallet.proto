@@ -1,12 +1,14 @@
 syntax = "proto3";
 
+import "google/protobuf/struct.proto";
+
 package wallet;
 
 service WalletService {
-  rpc CreateWallet (CreateWalletRequest) returns (WalletResponse);
-  rpc GetWallet (GetWalletRequest) returns (WalletResponse);
-  rpc CreditWallet (UpdateWalletBalanceRequest) returns (WalletResponse);
-  rpc DebitWallet (UpdateWalletBalanceRequest) returns (WalletResponse);
+  rpc CreateWallet (CreateWalletRequest) returns (CommonResponseObj);
+  rpc GetWallet (GetWalletRequest) returns (CommonResponseObj);
+  rpc CreditWallet (UpdateWalletBalanceRequest) returns (CommonResponseObj);
+  rpc DebitWallet (UpdateWalletBalanceRequest) returns (CommonResponseObj);
 }
 
 message CreateWalletRequest {
@@ -19,12 +21,24 @@ message GetWalletRequest {
 
 message UpdateWalletBalanceRequest {
   string userId = 1;
-  string amount = 2;
+  int32 amount = 2;
 }
 
-message WalletResponse {
-  string id = 1;
-  string userId = 2;
-  string balance = 3;
-  string createdAt = 4;
+
+
+
+message CommonResponseArray {
+  optional int32 status = 1;
+  optional bool success = 2;
+  string message = 3;
+  repeated google.protobuf.Struct data = 4;
+  optional string errors = 5;
+}
+
+message CommonResponseObj{
+  optional int32 status = 1;
+  optional bool success = 2;
+  string message = 3;
+  optional google.protobuf.Struct data = 4;
+  optional string errors = 5;
 }

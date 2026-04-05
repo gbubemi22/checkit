@@ -1,0 +1,95 @@
+{
+  "info": {
+    "name": "Wallet System Assessment",
+    "_postman_id": "e2b669bd-fad2-4884-9d55-6b3c5fc8d91f",
+    "description": "HTTP helpers for exercising the user and wallet services.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "gatewayUrl",
+      "value": "http://localhost:4000"
+    },
+    {
+      "key": "userId",
+      "value": ""
+    }
+  ],
+  "item": [
+    {
+      "name": "Create User",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"ada@example.com\",\n  \"name\": \"Ada Lovelace\"\n}"
+        },
+        "url": "{{gatewayUrl}}/v1/users/register"
+      }
+    },
+    {
+      "name": "Create Wallet",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"userId\": \"{{userId}}\"\n}"
+        },
+        "url": "{{gatewayUrl}}/v1/wallets"
+      }
+    },
+    {
+      "name": "Credit Wallet",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"userId\": \"{{userId}}\",\n  \"amount\": 100\n}"
+        },
+        "url": "{{gatewayUrl}}/v1/wallets/credit"
+      }
+    },
+    {
+      "name": "Debit Wallet",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"userId\": \"{{userId}}\",\n  \"amount\": 25\n}"
+        },
+        "url": "{{gatewayUrl}}/v1/wallets/debit"
+      }
+    },
+    {
+      "name": "Get Wallet",
+      "request": {
+        "method": "GET",
+        "url": "{{gatewayUrl}}/v1/wallets/{{userId}}"
+      }
+    }
+  ]
+}
